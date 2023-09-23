@@ -1,0 +1,23 @@
+{
+  "name": "ecs",
+  "version": "0.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onhq11/ExecCommandServer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/onhq11/ExecCommandServer/issues"
+  },
+  "homepage": "https://github.com/onhq11/ExecCommandServer#readme",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "http": "^0.0.1-security"
+  }
+}
