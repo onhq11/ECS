@@ -1,0 +1,21 @@
+body {
+    background-color: #67ce6b;
+}
+h1 {
+    color: white;
+}
+.container {
+    background-color: #fff;
+}
+input[type=text], select {
+    border: 1px solid #ccc;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #88888830;
+    border-radius: 9px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #88888850;
+}
