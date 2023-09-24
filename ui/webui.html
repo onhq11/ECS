@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ECS - WebUI</title>
+    <link rel="stylesheet" href="global.css">
+    <link id="theme-switch" rel="stylesheet" href="light-theme.css">
+    <script type="text/javascript">
+      let customScripts = {}
+      window.addEventListener("load", () => {
+        const config = "{{customScripts}}"
+        if(config === "{{customScripts}}") return
+
+        customScripts = config
+
+        let preparedInnerBody = ""
+        customScripts.map((item) => {
+          preparedInnerBody+=`<option value="${item.trigger}">${item.trigger}</option>`
+        })
+        document.getElementById("script").innerHTML = preparedInnerBody
+        document.getElementById("custom-scripts").style.display = "block"
+
+        const storedTheme = localStorage.getItem("theme")
+        if(storedTheme === "dark") {
+          document.getElementById("theme-switch").href = "dark-theme.css"
+          document.getElementById("switch-icon").src = "iconify/moon.svg"
+        } else {
+          localStorage.setItem("theme", "light")
+          document.getElementById("switch-icon").src = "iconify/sun.svg"
+        }
+      })
+
+      function toggleTheme() {
+        const storedTheme = localStorage.getItem("theme")
+        if(storedTheme === "dark") {
+          localStorage.setItem("theme", "light")
+          document.getElementById("theme-switch").href = "light-theme.css"
+          document.getElementById("switch-icon").src = "iconify/sun.svg"
+        } else {
+          localStorage.setItem("theme", "dark")
+          document.getElementById("theme-switch").href = "dark-theme.css"
+          document.getElementById("switch-icon").src = "iconify/moon.svg"
+        }
+      }
+
+      let notificationTimeout
+      function showNotification(value, variant = "success") {
+        if(notificationTimeout) {
+          clearTimeout(notificationTimeout)
+          hidePhase()
+          notificationTimeout = setTimeout(() => {
+            showPhase(value, variant)
+
+            notificationTimeout = setTimeout(() => {
+              hidePhase()
+            }, 2000)
+          }, 500)
+          return
+        }
+
+        showPhase(value, variant)
+
+        notificationTimeout = setTimeout(() => {
+          hidePhase()
+        }, 2000)
+      }
+
+      function showPhase(value, variant) {
+        document.getElementById("notification-content").innerHTML = value
+        document.getElementsByClassName("notification")[0].style.backgroundColor = variant === "success" ? localStorage.getItem("theme") === "dark" ? "#3CBF40" : "#2C8F30" : localStorage.getItem("theme") === "dark" ? "#BF3C40" : "#DB6568"
+        document.getElementsByClassName("notification")[0].style.opacity = "1"
+        document.getElementsByClassName("notification")[0].style.right = "1vw"
+      }
+
+      function hidePhase() {
+        document.getElementsByClassName("notification")[0].style.right = "-10vw"
+        document.getElementsByClassName("notification")[0].style.opacity = "0"
+      }
+    </script>
+</head>
+<body>
+    <h1>ECS - WebUI</h1>
+    <div class="container flex" style="gap: 4vw">
+        <div class="column">
+            <h2>GPIO Control Panel</h2>
+            <div class="flex" style="gap: 2vw">
+                <input type="text" name="pin" placeholder="GPIO PIN" style="flex: 1">
+                <select name="action" style="flex: 1">
+                    <optgroup label="Change state">
+                        <option value="1">On</option>
+                        <option value="0">Off</option>
+                    </optgroup>
+                    <optgroup label="Setup">
+                        <option value="export">Export</option>
+                        <option value="unexport">Unexport</option>
+                        <option value="out">Out</option>
+                        <option value="in">In</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="flex" style="margin-top: 10px">
+                <input type="button" value="Execute" id="gpio-action" style="flex: 1">
+            </div>
+            <p>
+                Change state (working if GPIO is Exported and direction is set to Output):<br>
+                - On (1 - High state): It represents a "on" voltage level (3.3V or 5V).<br>
+                - Off (0 - Low state): It represents a "off" voltage level (~0V).<br><br>
+                Setup:<br>
+                - Export: Making that pin accessible to user-space applications.<br>
+                - Unexport: Releasing the pin so that it's no longer accessible to user-space.<br>
+                - Out (Output): The pin is configured to send electrical signals.<br>
+                - In (Input): It is configured to receive electrical signals from other devices or components.<br>
+            </p>
+        </div>
+        <div class="column" id="custom-scripts" style="display: none">
+            <h2>Custom Scripts</h2>
+            <div class="flex" style="gap: 2vw">
+                <select name="script" style="flex: 1" id="script"></select>
+            </div>
+            <div class="flex" style="margin-top: 10px">
+                <input type="button" value="Execute" id="custom-action" style="flex: 1">
+            </div>
+            <p>
+                Here are your created scripts, you can execute them from this form. To add your own scripts to the application, edit the config.json file and add your scripts following the template.
+            </p>
+        </div>
+        <div class="switch">
+            <img id="switch-icon" height="32px" width="32px" src="iconify/sun.svg">
+        </div>
+    </div>
+    <div class="notification">
+        <h2 id="notification-content">Nigger</h2>
+    </div>
+    <script type="text/javascript">
+      document.getElementById("gpio-action").addEventListener("click", () => {
+        fetch(`/gpio/${document.getElementsByName("pin")[0].value}/${document.getElementsByName("action")[0].value}`)
+          .then(res => res.json())
+          .then(res => {
+            showNotification(JSON.stringify(res))
+            console.log(res)
+          })
+          .catch(err => {
+            showNotification(JSON.stringify(err), "error")
+            console.error(err)
+          })
+      })
+
+      document.getElementById("custom-action").addEventListener("click", () => {
+        fetch(customScripts.find((item) => item.trigger === document.getElementsByName("script")[0].value).trigger)
+          .then(res => res.json())
+          .then(res => {
+            showNotification(JSON.stringify(res))
+            console.log(res)
+          })
+          .catch(err => {
+            showNotification(JSON.stringify(err), "error")
+            console.error(err)
+          })
+      })
+
+      document.getElementsByClassName("switch")[0].addEventListener("click", toggleTheme)
+    </script>
+</body>
+</html>

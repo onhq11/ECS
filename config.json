@@ -1,0 +1,17 @@
+{
+  "port": 8080,
+  "startupCommands": [
+    "sudo echo 20 > /sys/class/gpio/export",
+    "sudo echo \"out\" > /sys/class/gpio/gpio20/direction"
+  ],
+  "customScripts": [
+    {
+      "trigger": "/tv_on",
+      "path": "/home/onhq/tvScripts/tv_on.sh"
+    },
+    {
+      "trigger": "/tv_off",
+      "path": "/home/onhq/tvScripts/tv_off.sh"
+    }
+  ]
+}
