@@ -25,8 +25,10 @@
         const storedTheme = localStorage.getItem("theme")
         if(storedTheme === "dark") {
           document.getElementById("theme-switch").href = "dark-theme.css"
+          document.getElementById("switch-icon").src = "iconify/moon.svg"
         } else {
           localStorage.setItem("theme", "light")
+          document.getElementById("switch-icon").src = "iconify/sun.svg"
         }
       })
 
@@ -35,9 +37,11 @@
         if(storedTheme === "dark") {
           localStorage.setItem("theme", "light")
           document.getElementById("theme-switch").href = "light-theme.css"
+          document.getElementById("switch-icon").src = "iconify/sun.svg"
         } else {
           localStorage.setItem("theme", "dark")
           document.getElementById("theme-switch").href = "dark-theme.css"
+          document.getElementById("switch-icon").src = "iconify/moon.svg"
         }
       }
     </script>
@@ -91,6 +95,9 @@
                 Here are your created scripts, you can execute them from this form. To add your own scripts to the application, edit the config.json file and add your scripts following the template.
             </p>
         </div>
+        <div class="switch">
+            <img id="switch-icon" height="32px" width="32px" src="iconify/sun.svg">
+        </div>
     </div>
     <script type="text/javascript">
       document.getElementById("gpio-action").addEventListener("click", () => {
@@ -112,6 +119,8 @@
             console.error(err)
           })
       })
+
+      document.getElementsByClassName("switch")[0].addEventListener("click", toggleTheme)
     </script>
 </body>
 </html>

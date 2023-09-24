@@ -4,11 +4,38 @@ body {
 h1 {
     color: #eee;
 }
+h2 {
+    color: #ccc;
+}
 .container {
-    background-color: #555;
+    background-color: #333;
 }
 input[type=text], select {
-    border: 1px solid #ccc;
+    border: 1px solid #999;
+    color: #ccc;
+}
+option, optgroup {
+    background-color: #555;
+}
+input[type=text]:focus, select:focus {
+    border: 1px solid #999;
+}
+input[type=button] {
+    background-color: #2C8F30;
+}
+input[type=button]:hover {
+    background-color: #1C7F20;
+}
+input[type=button]:active {
+    background-color: #0C6F10;
+}
+
+.switch:hover {
+    filter: drop-shadow(0px 0px 4px rgba(239, 239, 239, 1))
+}
+
+.switch:active {
+    filter: drop-shadow(0px 0px 4px rgba(209, 209, 209, 1))
 }
 
 ::-webkit-scrollbar-thumb {

@@ -77,6 +77,20 @@ const requestListener = (req, res) => {
             });
             webUI = true
         }
+
+        case "/iconify/sun.svg":
+        case "/iconify/moon.svg": {
+            fs.readFile(`./ui${req.url}`, (err, data) => {
+                if (err) {
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(`{"status": "error", "details": "failed to open webui"}`);
+                } else {
+                    res.writeHead(200, { 'Content-Type': 'image/svg+xml' });
+                    res.end(data.toString());
+                }
+            });
+            webUI = true
+        }
     }
     if(webUI) return
 

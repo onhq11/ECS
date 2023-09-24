@@ -4,11 +4,34 @@ body {
 h1 {
     color: white;
 }
+h2 {
+    color: black
+}
 .container {
     background-color: #fff;
 }
 input[type=text], select {
     border: 1px solid #ccc;
+}
+input[type=text]:focus, select:focus {
+    border: 1px solid #333;
+}
+input[type=button] {
+    background-color: #4CAF50;
+}
+input[type=button]:hover {
+    background-color: #5CBF60;
+}
+input[type=button]:active {
+    background-color: #3C9F40;
+}
+
+.switch:hover {
+    filter: drop-shadow(0px 0px 4px rgba(89, 89, 89, 1))
+}
+
+.switch:active {
+    filter: drop-shadow(0px 0px 4px rgba(9, 9, 9, 1))
 }
 
 ::-webkit-scrollbar-thumb {
