@@ -1,5 +1,5 @@
 body {
-    background-color: #379e3b;
+    background-color: #076e0b;
 }
 h1 {
     color: #eee;
@@ -45,4 +45,8 @@ input[type=button]:active {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #cccccc50;
+}
+
+.notification h2 {
+    color: #333;
 }

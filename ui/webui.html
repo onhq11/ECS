@@ -44,10 +44,41 @@
           document.getElementById("switch-icon").src = "iconify/moon.svg"
         }
       }
-    </script>
-    <style>
 
-    </style>
+      let notificationTimeout
+      function showNotification(value, variant = "success") {
+        if(notificationTimeout) {
+          clearTimeout(notificationTimeout)
+          hidePhase()
+          notificationTimeout = setTimeout(() => {
+            showPhase(value, variant)
+
+            notificationTimeout = setTimeout(() => {
+              hidePhase()
+            }, 2000)
+          }, 500)
+          return
+        }
+
+        showPhase(value, variant)
+
+        notificationTimeout = setTimeout(() => {
+          hidePhase()
+        }, 2000)
+      }
+
+      function showPhase(value, variant) {
+        document.getElementById("notification-content").innerHTML = value
+        document.getElementsByClassName("notification")[0].style.backgroundColor = variant === "success" ? localStorage.getItem("theme") === "dark" ? "#3CBF40" : "#2C8F30" : localStorage.getItem("theme") === "dark" ? "#BF3C40" : "#DB6568"
+        document.getElementsByClassName("notification")[0].style.opacity = "1"
+        document.getElementsByClassName("notification")[0].style.right = "1vw"
+      }
+
+      function hidePhase() {
+        document.getElementsByClassName("notification")[0].style.right = "-10vw"
+        document.getElementsByClassName("notification")[0].style.opacity = "0"
+      }
+    </script>
 </head>
 <body>
     <h1>ECS - WebUI</h1>
@@ -99,23 +130,32 @@
             <img id="switch-icon" height="32px" width="32px" src="iconify/sun.svg">
         </div>
     </div>
+    <div class="notification">
+        <h2 id="notification-content">Nigger</h2>
+    </div>
     <script type="text/javascript">
       document.getElementById("gpio-action").addEventListener("click", () => {
         fetch(`/gpio/${document.getElementsByName("pin")[0].value}/${document.getElementsByName("action")[0].value}`)
+          .then(res => res.json())
           .then(res => {
+            showNotification(JSON.stringify(res))
             console.log(res)
           })
           .catch(err => {
+            showNotification(JSON.stringify(err), "error")
             console.error(err)
           })
       })
 
       document.getElementById("custom-action").addEventListener("click", () => {
         fetch(customScripts.find((item) => item.trigger === document.getElementsByName("script")[0].value).trigger)
+          .then(res => res.json())
           .then(res => {
+            showNotification(JSON.stringify(res))
             console.log(res)
           })
           .catch(err => {
+            showNotification(JSON.stringify(err), "error")
             console.error(err)
           })
       })
