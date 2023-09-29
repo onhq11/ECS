@@ -1,21 +1,18 @@
 {
   "name": "ecs",
-  "version": "1.0",
-  "description": "",
+  "version": "1.1",
+  "description": "Server that allows you to control GPIO and execute bash scripts remotely using URL requests",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/onhq11/ExecCommandServer.git"
+    "url": "git+https://github.com/onhq11/ECS.git"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/onhq11/ExecCommandServer/issues"
-  },
-  "homepage": "https://github.com/onhq11/ExecCommandServer#readme",
+  "homepage": "https://github.com/onhq11/ECS#readme",
   "dependencies": {
     "child_process": "^1.0.2",
     "http": "^0.0.1-security"

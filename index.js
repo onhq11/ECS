@@ -12,7 +12,7 @@ const init = () => {
 }
 
 const readConfig = () => {
-    return fs.readFileSync("./config.json", "utf-8")
+    return fs.readFileSync("./config/config.json", "utf-8")
 }
 
 const startServer = (config) => {

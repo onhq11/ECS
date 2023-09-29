@@ -1,0 +1,10 @@
+version: '3'
+services:
+  ecs:
+    env_file:
+      - .docker.env
+    image: onhq/ecs
+    ports:
+      - ${WEBSERVER_PORT}:8080
+    volumes:
+      - ${CONFIG_PATH}:/usr/src/app/config
