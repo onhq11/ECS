@@ -1,8 +1,10 @@
 <div align="center">
 
+<img src="https://github.com/onhq11/ECS/blob/main/ui/img/banner.png?raw=true" style="border-radius: 20px"><br><br>
+
 # ECS
 Server that allows you to control GPIO and execute bash scripts remotely using URL requests<br>
-**[Install Now »](https://github.com/onhq11/ExecCommandServer/releases)**<br><br><br>
+**[Install Now »](https://github.com/onhq11/ECS/releases)**<br><br><br>
 </div><br><br>
 
 ## Requirements
