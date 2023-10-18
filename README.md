@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/onhq11/ECS/blob/main/ui/img/banner.png?raw=true" style="border-radius: 20px"><br><br>
+<img src="https://github.com/onhq11/ECS/blob/ui/banner.png?raw=true" style="border-radius: 20px"><br><br>
 
 # ECS
 Server that allows you to control GPIO and execute bash scripts remotely using URL requests<br>
