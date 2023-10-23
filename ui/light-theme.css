@@ -1,5 +1,5 @@
 body {
-    background-color: #67ce6b;
+    background: linear-gradient(283deg, rgba(103,24,143,1) 0%, rgba(189,20,225,1) 54%, rgba(139,20,255,1) 100%);
 }
 h1 {
     color: white;
@@ -8,7 +8,7 @@ h2 {
     color: black
 }
 .container {
-    background-color: #fff;
+    background-color: rgba(255,255,255);
 }
 input[type=text], select {
     border: 1px solid #ccc;
@@ -17,13 +17,13 @@ input[type=text]:focus, select:focus {
     border: 1px solid #333;
 }
 input[type=button] {
-    background-color: #4CAF50;
+    background-color: #d415ab;
 }
 input[type=button]:hover {
-    background-color: #5CBF60;
+    background-color: #a2006f;
 }
 input[type=button]:active {
-    background-color: #3C9F40;
+    background-color: #92005f;
 }
 
 .switch:hover {

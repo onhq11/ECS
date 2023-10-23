@@ -1,5 +1,5 @@
 body {
-    background-color: #076e0b;
+    background: linear-gradient(283deg, rgba(83,4,123,1) 0%, rgba(169,0,205,1) 54%, rgba(119,0,235,1) 100%);
 }
 h1 {
     color: #eee;
@@ -8,7 +8,7 @@ h2 {
     color: #ccc;
 }
 .container {
-    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 input[type=text], select {
     border: 1px solid #999;
@@ -21,13 +21,13 @@ input[type=text]:focus, select:focus {
     border: 1px solid #999;
 }
 input[type=button] {
-    background-color: #2C8F30;
+    background-color: #a2007f;
 }
 input[type=button]:hover {
-    background-color: #1C7F20;
+    background-color: #a2007f;
 }
 input[type=button]:active {
-    background-color: #0C6F10;
+    background-color: #82005f;
 }
 
 .switch:hover {
